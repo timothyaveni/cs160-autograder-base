@@ -5,8 +5,9 @@ There's a lot of nesting going on here, and a few ways to run the autograder.
 You can:
 
 - run the autograder Docker image just like you're in Gradescope, using `harness/run.sh`. This will output the Gradescope-formatted `results.json` to a directory on your host machine, but you'll also get an error saying the container couldn't upload results to Gradescope (since you don't have the right token).
-- run the autograder locally on your host machine, without Docker, with `autograder/run-playwright-dev.sh`. This will, like the main image, compute the student's score and output the Gradescope-formatted `results.json`, this time to `autograder/process-results/results.json`. Since this runs on your host OS, you can even modify `run-playwright-dev.sh` to pop open the Playwright debug UI. This script, like the Docker image, uploads Playwright artifacts (traces) to the artifact server.
-- run just the Playwright tests, without post-processing the output, inside the `autograder/playwright` directory (using `npm install && npx playwright test`). This is probably what we want to share with students, because we don't need their local runs to upload traces to the artifact server (and would prefer not to share the upload server API key so directly, though it ends up being public in our Docker image anyway).
+- run the autograder locally on your host machine, without Docker, with `autograder/run-playwright-dev.sh`. This will, like the main image, compute the student's score and output the Gradescope-formatted `results.json`, this time to `autograder/process-results/results.json`. Since this runs on your host OS, you can even modify `run-playwright-dev.sh` to pop open the Playwright debug UI. This script, like the Docker image, uploads Playwright artifacts (traces) to the artifact server and links them in the grading output.
+  - You can think of the contents of the `autograder/` directory as being similar to other [autograder examples provided by Gradescope](https://gradescope-autograders.readthedocs.io/en/latest/python/), in that they wrap a unit testing framework with some logic to compute scores for submissions and output a `results.json` file. The top-level directory of the repository is one level higher, allowing you to run the grading Docker image for testing without using Gradescope's infrastructure.
+- run just the Playwright tests, without post-processing the output for grading, inside the `autograder/playwright` directory (using `npm install && npx playwright test`). This is probably what we want to share with students, because we don't need their local runs to upload traces to the artifact server (and would prefer not to share the upload server API key so directly, though it ends up being public in our Docker image anyway).
 
 Directory structure:
 
@@ -43,8 +44,6 @@ If you want to test students' server code, you'll want to add some logic into `r
 
 The **artifact server** is a super simple pair of Docker images that run a server accepting .zip file uploads and serving them back up as HTML. We use this to link students to an interactive trace from Playwright. Host this on an isolated domain, since it's serving static HTML straight from the uploaded zip files. Code for that server is in another repository.
 
-(this is not an official release from Gradescope; I developed this for a course after leaving my job at Turnitin.)
-
 ## Building and pushing the Docker image
 
 The image is built every time you run `harness/run.sh`, though of course it's also possible to build manually. We push the image to Docker Hub and use the corresponding image identifier in the Gradescope "Manual Docker Configuration" field.
@@ -53,3 +52,9 @@ The image is built every time you run `harness/run.sh`, though of course it's al
 source autograder/autograder-config.sh
 docker push $AUTOGRADER_IMAGE
 ```
+
+## Disclaimer
+
+This is not an official release from Gradescope; I developed this for a course after leaving my job at Turnitin.
+
+I'm redistributing `harness.py` here because I don't think anyone over there would mind, but really most of it doesn't need to be in this repo; all that matters is that it runs the `run_autograder` script correctly. Still, I'll avoid slapping a LICENSE onto this repo. If you want to use anything in here, uhh, go for it, there, that's the license.
