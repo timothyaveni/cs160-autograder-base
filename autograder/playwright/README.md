@@ -15,7 +15,7 @@ Then, run a static server at port `6160`, passing in the directory of your submi
 npx serve -p 6160 /path/to/your/code
 ```
 
-You can use any static server for this purpose (e.g. `python3 -m http.server`), as long as it's serving on port `6160`.
+You can use any static server for this purpose (e.g. `python3 -m http.server`), as long as it's serving on port `6160`. Note that depending on your server configuration, this may expose your served directory to others on your network (including on eduroam).
 
 Finally, in a new terminal opened to this directory (containing this README), run the tests:
 
