@@ -10,7 +10,8 @@
   "author": "Timothy J. Aveni <me@timothyaveni.com> (https://timothyaveni.com/)",
   "license": "MIT",
   "dependencies": {
-    "playwright": "1.44"
+    "playwright": "1.44",
+    "serve": "^14.2.3"
   },
   "devDependencies": {
     "@playwright/test": "^1.44.1",

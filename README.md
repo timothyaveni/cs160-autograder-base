@@ -44,6 +44,35 @@ If you want to test students' server code, you'll want to add some logic into `r
 
 The **artifact server** is a super simple pair of Docker images that run a server accepting .zip file uploads and serving them back up as HTML. We use this to link students to an interactive trace from Playwright. Host this on an isolated domain, since it's serving static HTML straight from the uploaded zip files. Code for that server is in another repository.
 
+## To make an autograder
+
+Add and edit `.spec.ts` (or `.spec.js` files, I won't judge) files in `autograder/playwright/tests`.
+
+Add `points` annotations to the tests you want to grade. These will be grabbed by the post-processing script to assign point values to each test. Right now, this will only work for top-level tests (not those inside a `describe` block).
+
+```ts
+test(
+  "The page has the correct title",
+  {
+    annotation: {
+      type: "points",
+      description: "1",
+    },
+  },
+  async ({ page }) => {
+    await page.goto("/");
+
+    expect(await page.title()).toBe("Programming assignment");
+  }
+);
+```
+
+Make changes to `playwright.config.ts`, if you need.
+
+Copy `autograder-config.example.sh` to `autograder-config.sh` and fill in the right values.
+
+Distribute `autograder/playwright` to students so they can run the tests locally (there's really no reason not to -- your tests won't be secret anyway, because Playwright shows the source code in traces). Even tests hidden in `results.json` will be visible in the trace index.
+
 ## Building and pushing the Docker image
 
 The image is built every time you run `harness/run.sh`, though of course it's also possible to build manually. We push the image to Docker Hub and use the corresponding image identifier in the Gradescope "Manual Docker Configuration" field.
