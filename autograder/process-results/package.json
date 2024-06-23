@@ -1,0 +1,12 @@
+{
+  "name": "process-results",
+  "version": "1.0.0",
+  "description": "",
+  "main": "process-results.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Timothy J. Aveni <me@timothyaveni.com> (https://timothyaveni.com/)",
+  "license": "MIT",
+  "type": "module"
+}

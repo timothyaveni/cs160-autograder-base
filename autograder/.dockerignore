@@ -1,0 +1,5 @@
+playwright/node_modules/
+playwright/outputs/
+process-results/results.json
+report-data.json
+playwright/report.zip

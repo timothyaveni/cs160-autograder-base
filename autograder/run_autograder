@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# This is what runs in the actual Gradescope container. You shouldn't need it in development.
+
+cd /autograder/submission && python3 -m http.server 6160 &> /dev/null &
+
+cd /autograder/playwright && npx playwright test
+
+cd /autograder && bash upload-report.sh > /autograder/report-data.json
+
+cat /autograder/report-data.json
+
+cd /autograder/process-results && node process-results.js
+
+cp /autograder/process-results/results.json /autograder/results/results.json
