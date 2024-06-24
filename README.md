@@ -42,7 +42,7 @@ If you want to test students' server code, you'll want to add some logic into `r
 
 ## Artifact server
 
-The **artifact server** is a super simple pair of Docker images that run a server accepting .zip file uploads and serving them back up as HTML. We use this to link students to an interactive trace from Playwright. Host this on an isolated domain, since it's serving static HTML straight from the uploaded zip files. Code for that server is in another repository.
+The **artifact server** is a super simple pair of Docker images that run a server accepting .zip file uploads and serve them back up as HTML. We use this to link students to an interactive trace from Playwright. Host this on an isolated domain, since it's serving static HTML straight from the uploaded zip files. Code for that server is in another repository.
 
 ## To make an autograder
 
