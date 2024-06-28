@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source upload-server-vars.sh
+source autograder-config.sh
 
 cd playwright/outputs/html-report
 zip -r ../report.zip . &> /dev/null

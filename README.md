@@ -67,7 +67,7 @@ test(
 );
 ```
 
-Make changes to `playwright.config.ts`, if you need.
+Make changes to `playwright.config.ts`, if you need. Consider running tests in parallel by changing `fullyParallel`.
 
 Copy `autograder-config.example.sh` to `autograder-config.sh` and fill in the right values.
 
