@@ -10,6 +10,8 @@ if [ "$(ls -A | wc -l)" = 1 ] && [ -d "$(ls -A)" ]; then
   cd */
 fi
 
+SUBMISSION_DIR=$(pwd)
+
 python3 -m http.server 6160 &> /dev/null &
 
 ## Run the tests
@@ -20,7 +22,7 @@ cd /autograder/playwright && npx playwright test
 
 cd /autograder && bash upload-report.sh > /autograder/report-data.json
 cat /autograder/report-data.json # seems handy
-cd /autograder && bash upload-submission.sh /autograder/submission > /autograder/submission-data.json
+cd /autograder && bash upload-submission.sh $SUBMISSION_DIR > /autograder/submission-data.json
 
 ## Figure out how many points to award and tell Gradescope
 
