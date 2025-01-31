@@ -20,7 +20,7 @@ cd /autograder/playwright && npx playwright test
 
 cd /autograder && bash upload-report.sh > /autograder/report-data.json
 cat /autograder/report-data.json # seems handy
-cd /autograder && upload-submission.sh /autograder/submission > /autograder/submission-data.json
+cd /autograder && bash upload-submission.sh /autograder/submission > /autograder/submission-data.json
 
 ## Figure out how many points to award and tell Gradescope
 
