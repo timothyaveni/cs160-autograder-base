@@ -13,7 +13,12 @@ const reportDataFile = await fs.promises.readFile(
   "utf-8"
 );
 const reportData = JSON.parse(reportDataFile);
-const reportBaseUrl = reportData.host + reportData.url;
+
+const submissionDataFile = await fs.promises.readFile(
+  path.join(scriptDir, "../submission-data.json"),
+  "utf-8"
+);
+const submissionData = JSON.parse(submissionDataFile);
 
 // type TextFormat = "text" | "html" | "simple_format" | "md" | "ansi";
 // type Visibility = "hidden" | "after_due_date" | "after_published" | "visible";
@@ -83,7 +88,7 @@ for (const suite of inputResults.suites) {
         max_score: points,
         status: earned ? "passed" : "failed",
         name: `${spec.title} :: ${test.projectName}`, // has button :: chromium
-        output: `<a href="${reportBaseUrl}#?testId=${spec.id}">See trace for ${spec.title} :: ${test.projectName}</a>`,
+        output: `<a href="${reportData.url}#?testId=${spec.id}">See trace for ${spec.title} :: ${test.projectName}</a>`,
         output_format: "html",
         ...(visibilityAnnotation
           ? { visibility: visibilityAnnotation.description }
@@ -92,6 +97,16 @@ for (const suite of inputResults.suites) {
     }
   }
 }
+
+tests.push({
+  score: 0,
+  max_score: 0,
+  status: "passed",
+  name: `Uploaded submission`,
+  output: `<a href="${submissionData.url}">See uploaded submission</a>`,
+  output_format: "html",
+  visibility: "visible",
+});
 
 const outputResults = {
   visibility: "visible",

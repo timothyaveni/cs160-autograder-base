@@ -2,6 +2,7 @@ playwright/node_modules/
 playwright/outputs/
 process-results/results.json
 report-data.json
+submission-data.json
 playwright/report.zip
 
 autograder-config.sh

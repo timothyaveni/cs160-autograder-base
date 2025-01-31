@@ -21,7 +21,9 @@ npx playwright test
 
 kill $STATIC_SERVER_PID
 
-cd .. && bash upload-report.sh > ./report-data.json
+cd ..
+bash upload-report.sh > ./report-data.json
+bash upload-submission.sh $SUBMISSION_PATH > ./submission-data.json
 
 cd process-results
 node process-results.js

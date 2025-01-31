@@ -11,7 +11,7 @@ import { defineConfig, devices } from "@playwright/test";
  */
 export default defineConfig({
   testDir: "./tests",
-  fullyParallel: false,
+  fullyParallel: true,
   retries: 0,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   outputDir: "outputs/test-results",

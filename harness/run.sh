@@ -10,7 +10,9 @@ fi
 # resolve relative path
 SUBMISSION_PATH=$(realpath $SUBMISSION_PATH_RELATIVE)
 
-docker build -t timothyaveni/cs160-su24-pa-1-autograder ../autograder
+source ../autograder/autograder-config.sh
+
+docker build -t $AUTOGRADER_IMAGE ../autograder
 
 chmod 777 $(pwd)/update_harness.py
 
@@ -20,4 +22,4 @@ docker run \
   -v $(pwd)/update_harness.py:/autograder/update_harness.py \
   -v $(pwd)/../autograder-results:/autograder/results \
   -v $SUBMISSION_PATH:/autograder/submission \
-  timothyaveni/cs160-su24-pa-1-autograder
+  $AUTOGRADER_IMAGE

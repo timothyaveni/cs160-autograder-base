@@ -2,14 +2,26 @@
 
 # This is what runs in the actual Gradescope container. You shouldn't need it in development.
 
-cd /autograder/submission && python3 -m http.server 6160 &> /dev/null &
+## Run a server with the student submission
+
+cd /autograder/submission
+# if the only thing in the submission is a top-level directory, enter it
+if [ "$(ls -A | wc -l)" = 1 ] && [ -d "$(ls -A)" ]; then
+  cd */
+fi
+
+python3 -m http.server 6160 &> /dev/null &
+
+## Run the tests
 
 cd /autograder/playwright && npx playwright test
 
-cd /autograder && bash upload-report.sh > /autograder/report-data.json
+## Upload the Playwright report and write the resulting URL to a file
 
-cat /autograder/report-data.json
+cd /autograder && bash upload-report.sh > /autograder/report-data.json
+cat /autograder/report-data.json # seems handy
+
+## Figure out how many points to award and tell Gradescope
 
 cd /autograder/process-results && node process-results.js
-
 cp /autograder/process-results/results.json /autograder/results/results.json
