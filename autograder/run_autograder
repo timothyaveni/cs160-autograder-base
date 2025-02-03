@@ -5,6 +5,11 @@
 ## Run a server with the student submission
 
 cd /autograder/submission
+
+# remove macos garbage >:(
+find . -type f -name '.DS_Store' -delete
+find . -type d -name '__MACOSX' -exec rm -r {} \+
+
 # if the only thing in the submission is a top-level directory, enter it
 if [ "$(ls -A | wc -l)" = 1 ] && [ -d "$(ls -A)" ]; then
   cd */
