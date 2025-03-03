@@ -86,4 +86,4 @@ docker push $AUTOGRADER_IMAGE
 
 This is not an official release from Gradescope; I developed this for a course after leaving my job at Turnitin.
 
-I'm redistributing `harness.py` here because I don't think anyone over there would mind, but really most of it doesn't need to be in this repo; all that matters is that it runs the `run_autograder` script correctly. Still, I'll avoid slapping a LICENSE onto this repo. If you want to use anything in here, uhh, go for it, there, that's the license.
+I'm redistributing `harness.py` here (copied from the publicly-available Docker base image) because I don't think anyone over there would mind, but really most of it doesn't need to be in this repo; all that matters is that it runs the `run_autograder` script correctly. Still, I'll avoid slapping a LICENSE onto this repo. If you want to use anything in here, uhh, go for it, there, that's the license.
